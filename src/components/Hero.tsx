@@ -7,12 +7,12 @@ export function Hero({
   texts,
 }: Pick<MemorialConfig, "deceased" | "texts">) {
   return (
-    <section className="bg-white">
+    <section className="bg-card">
       <div className="relative h-48 w-full overflow-hidden sm:h-56 md:h-64">
         <HeroBanner bannerUrl={deceased.bannerUrl} />
         <button
           type="button"
-          className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-md bg-gold px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-white shadow hover:bg-gold-dark"
+          className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-md bg-gold px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-brand shadow-sm transition hover:bg-gold-dark"
         >
           <Share2 className="h-3.5 w-3.5" />
           {texts.share}

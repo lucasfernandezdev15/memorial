@@ -17,13 +17,13 @@ export function QuickActions({ texts, onAction }: QuickActionsProps) {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-4">
-      <div className="grid grid-cols-1 divide-y divide-border rounded-xl border border-border bg-white shadow-sm sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+      <div className="grid grid-cols-1 divide-y divide-stone rounded-xl border border-stone bg-card shadow-sm sm:grid-cols-3 sm:divide-x sm:divide-y-0">
         {actions.map(({ icon: Icon, label, type }) => (
           <button
             key={label}
             type="button"
             onClick={() => onAction(type)}
-            className="flex items-center justify-center gap-3 px-4 py-5 text-sm font-medium text-brand transition hover:bg-gray-50"
+            className="flex items-center justify-center gap-3 px-4 py-5 text-sm font-medium text-brand transition hover:bg-brand-soft"
           >
             <Icon className="h-6 w-6 shrink-0" strokeWidth={1.5} />
             <span>{label}</span>

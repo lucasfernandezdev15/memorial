@@ -93,7 +93,7 @@ const liveWindow = demoDayWindow();
 export const memorialConfig: MemorialConfig = {
   brand: {
     name: "Memorial Vivo",
-    tagline: "Memorias que acompañan",
+    tagline: "Serenidad · Respeto · Contención",
     phone: "0800 123 4848",
     phoneLabel: "0800 123 4848 | 24H",
     logoText: "Memorial Vivo",

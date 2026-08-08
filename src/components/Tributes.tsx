@@ -30,7 +30,7 @@ export function Tributes({ tributes, texts }: TributesProps) {
 
   return (
     <section>
-      <h2 className="text-lg font-bold text-foreground">
+      <h2 className="font-display text-2xl font-semibold text-brand">
         {texts.tributesTitle} ({tributes.length})
       </h2>
 
@@ -42,8 +42,8 @@ export function Tributes({ tributes, texts }: TributesProps) {
             onClick={() => setFilter(tab.id)}
             className={`rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide transition ${
               filter === tab.id
-                ? "bg-brand text-white"
-                : "border border-border bg-white text-foreground hover:border-brand"
+                ? "bg-brand text-card"
+                : "border border-stone bg-card text-foreground hover:border-brand"
             }`}
           >
             {tab.label}
@@ -53,7 +53,7 @@ export function Tributes({ tributes, texts }: TributesProps) {
 
       <div className="mt-4 space-y-3">
         {filtered.length === 0 && (
-          <p className="rounded-xl border border-border bg-white p-6 text-center text-sm text-muted">
+          <p className="rounded-xl border border-stone bg-card p-6 text-center text-sm text-muted">
             No hay homenajes todavía.
           </p>
         )}
@@ -61,10 +61,10 @@ export function Tributes({ tributes, texts }: TributesProps) {
         {filtered.map((tribute) => (
           <article
             key={tribute.id}
-            className="rounded-xl border border-border bg-white p-4 shadow-sm"
+            className="rounded-xl border border-stone bg-card p-4 shadow-sm"
           >
             <div className="flex items-start gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand">
                 {tribute.type === "candle" && <Flame className="h-5 w-5" />}
                 {tribute.type === "photo" && <ImageIcon className="h-5 w-5" />}
                 {tribute.type === "message" && (
@@ -73,7 +73,7 @@ export function Tributes({ tributes, texts }: TributesProps) {
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-baseline gap-x-2">
-                  <h3 className="font-semibold text-foreground">
+                  <h3 className="font-display text-lg font-semibold text-brand">
                     {tribute.author}
                   </h3>
                   {tribute.relation && (

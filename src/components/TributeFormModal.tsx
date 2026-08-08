@@ -87,7 +87,7 @@ export function TributeFormModal({
       onClick={handleClose}
     >
       <div
-        className="relative w-full max-w-md rounded-xl bg-white p-6 shadow-2xl"
+        className="relative w-full max-w-md rounded-xl bg-card p-6 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -99,7 +99,7 @@ export function TributeFormModal({
           <X className="h-5 w-5" />
         </button>
 
-        <h2 className="pr-8 text-lg font-semibold text-foreground">
+        <h2 className="font-display pr-8 text-2xl font-semibold text-brand">
           {titles[mode]}
         </h2>
         <p className="mt-1 text-xs text-muted">

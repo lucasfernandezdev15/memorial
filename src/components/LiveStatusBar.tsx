@@ -46,7 +46,7 @@ export function LiveStatusBar({
   }
 
   return (
-    <div className="live-banner-in flex w-full items-center justify-center border-b border-border bg-white px-4 py-2.5 text-sm text-muted">
+    <div className="live-banner-in flex w-full items-center justify-center border-b border-stone bg-card px-4 py-2.5 text-sm text-muted">
       {texts.endedLabel}
     </div>
   );

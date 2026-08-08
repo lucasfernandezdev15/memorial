@@ -99,7 +99,7 @@ export function MemorialPage({ config, autoOpenLive = false }: MemorialPageProps
         />
       </main>
 
-      <footer className="border-t border-border bg-white py-6 text-center text-xs text-muted">
+      <footer className="border-t border-stone bg-card py-6 text-center text-xs text-muted">
         {config.brand.name} — {config.brand.tagline}
       </footer>
 

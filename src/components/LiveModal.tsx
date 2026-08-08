@@ -25,7 +25,7 @@ export function LiveModal({ open, onClose, config }: LiveModalProps) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-xl overflow-hidden rounded-xl bg-white shadow-2xl"
+        className="relative w-full max-w-xl overflow-hidden rounded-xl bg-card shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -50,7 +50,7 @@ export function LiveModal({ open, onClose, config }: LiveModalProps) {
 
         <div className="px-6 pb-6 pt-14 text-center">
           <p className="text-sm text-muted">{texts.watchingLive}</p>
-          <h2 className="font-display mt-1 text-2xl font-semibold text-foreground">
+          <h2 className="font-display mt-1 text-2xl font-semibold text-brand">
             {deceased.fullName}
           </h2>
 

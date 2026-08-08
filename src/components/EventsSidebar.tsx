@@ -21,7 +21,9 @@ export function EventsSidebar({
 }: EventsSidebarProps) {
   return (
     <aside>
-      <h2 className="text-lg font-bold text-foreground">{texts.eventsTitle}</h2>
+      <h2 className="font-display text-2xl font-semibold text-brand">
+        {texts.eventsTitle}
+      </h2>
 
       <div className="mt-3 space-y-4">
         {events.map((event) => {
@@ -31,10 +33,10 @@ export function EventsSidebar({
           return (
             <div
               key={event.id}
-              className={`overflow-hidden rounded-xl border bg-white shadow-sm transition ${
+              className={`overflow-hidden rounded-xl border bg-card shadow-sm transition ${
                 isLiveEvent
-                  ? "border-live ring-2 ring-live/25 shadow-md"
-                  : "border-border"
+                  ? "border-live ring-2 ring-live/20 shadow-md"
+                  : "border-stone"
               }`}
             >
               <div
