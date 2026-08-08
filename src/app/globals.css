@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f3f4f6;
-  --foreground: #333333;
-  --brand: #7a8d4d;
-  --brand-dark: #5f7040;
-  --gold: #e9b85b;
-  --gold-dark: #d4a44a;
-  --live: #ef5e47;
-  --live-dark: #d94a35;
+  --background: #eef2f5;
+  --foreground: #243039;
+  --brand: #1f6f78;
+  --brand-dark: #16555c;
+  --brand-soft: #e5f3f4;
+  --gold: #d4a05a;
+  --gold-dark: #b8843f;
+  --live: #e4574a;
+  --live-dark: #c94438;
   --card: #ffffff;
-  --muted: #6b7280;
-  --border: #e5e7eb;
+  --muted: #6b7785;
+  --border: #d5dde5;
 }
 
 @theme inline {
@@ -19,6 +20,7 @@
   --color-foreground: var(--foreground);
   --color-brand: var(--brand);
   --color-brand-dark: var(--brand-dark);
+  --color-brand-soft: var(--brand-soft);
   --color-gold: var(--gold);
   --color-gold-dark: var(--gold-dark);
   --color-live: var(--live);
@@ -27,12 +29,19 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --font-sans: var(--font-source-sans);
+  --font-display: var(--font-fraunces);
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(ellipse 70% 45% at 0% 0%, rgba(31, 111, 120, 0.08), transparent 55%),
+    var(--background);
   color: var(--foreground);
   font-family: var(--font-source-sans), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
 }
 
 @keyframes live-pulse {
@@ -45,6 +54,21 @@ body {
   }
 }
 
+@keyframes live-banner-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .live-pulse {
   animation: live-pulse 1.4s ease-in-out infinite;
+}
+
+.live-banner-in {
+  animation: live-banner-in 0.45s ease-out both;
 }

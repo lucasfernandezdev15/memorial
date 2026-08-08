@@ -7,6 +7,8 @@ export type StreamType = "youtube" | "hls" | "iframe" | "mp4";
 
 export type TributeType = "message" | "photo" | "candle";
 
+export type StreamStatus = "disabled" | "upcoming" | "live" | "ended";
+
 export interface Tribute {
   id: string;
   author: string;
@@ -42,33 +44,23 @@ export interface MemorialConfig {
     birthYear: number;
     deathYear: number;
     age: number;
-    /** Iniciales si no hay foto */
     initials: string;
-    /** Opcional: dejar vacío para usar placeholder */
     photoUrl?: string;
     bannerUrl?: string;
   };
   stream: {
     enabled: boolean;
-    /**
-     * Lo más fácil para el comprador: YouTube Live.
-     * 1) Transmitir desde el celular/cámara a YouTube
-     * 2) Pegar acá el link o el ID del video
-     */
     type: StreamType;
     url: string;
-    /** Inicio de la velación (ISO). El botón EN VIVO solo se ve en esta ventana. */
     startsAt: string;
-    /** Fin de la velación (ISO). */
     endsAt: string;
     /**
-     * true = botón siempre visible (útil para demos de venta).
-     * En entrega al cliente: false, y usá startsAt/endsAt reales.
+     * true = siempre "en vivo" (demo de venta).
+     * En entrega: false + startsAt/endsAt reales.
      */
     forceLive: boolean;
   };
   events: CeremonyEvent[];
-  /** Homenajes iniciales de demo (se mezclan con lo guardado en el navegador) */
   tributes: Tribute[];
   texts: {
     shareMemory: string;
@@ -82,10 +74,12 @@ export interface MemorialConfig {
     share: string;
     login: string;
     activateMemorial: string;
+    liveBanner: string;
+    upcomingLabel: string;
+    endedLabel: string;
   };
 }
 
-/** Ventana de demo: todo el día de hoy (hora local del servidor/build). */
 function demoDayWindow() {
   const start = new Date();
   start.setHours(0, 0, 0, 0);
@@ -99,7 +93,7 @@ const liveWindow = demoDayWindow();
 export const memorialConfig: MemorialConfig = {
   brand: {
     name: "Memorial Vivo",
-    tagline: "Preservando memorias y perpetuando emociones",
+    tagline: "Memorias que acompañan",
     phone: "0800 123 4848",
     phoneLabel: "0800 123 4848 | 24H",
     logoText: "Memorial Vivo",
@@ -117,13 +111,10 @@ export const memorialConfig: MemorialConfig = {
   },
   stream: {
     enabled: true,
-    // Opción más fácil de instalar: YouTube Live (solo pegar URL)
     type: "youtube",
-    // Video de demo (paisaje tranquilo). Al vender: URL del YouTube Live real.
     url: "https://www.youtube.com/watch?v=BHACKCNDMW8",
     startsAt: liveWindow.startsAt,
     endsAt: liveWindow.endsAt,
-    // Demo de venta: botón visible. Al entregar: false + horarios reales.
     forceLive: true,
   },
   events: [
@@ -176,6 +167,9 @@ export const memorialConfig: MemorialConfig = {
     share: "COMPARTIR",
     login: "LOGIN",
     activateMemorial: "ACTIVAR MEMORIAL",
+    liveBanner: "El velatorio virtual está en vivo — mirá la transmisión",
+    upcomingLabel: "El velatorio virtual inicia",
+    endedLabel: "El velatorio virtual ya finalizó",
   },
 };
 
@@ -189,13 +183,34 @@ function formatEventLabel(iso: string) {
   return `${date} a las 13:00`;
 }
 
-/** ¿El botón EN VIVO debe mostrarse ahora? */
+export function formatStreamTime(iso: string) {
+  return new Date(iso).toLocaleString("es-AR", {
+    weekday: "short",
+    day: "2-digit",
+    month: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+export function getStreamStatus(
+  stream: MemorialConfig["stream"],
+  now = new Date(),
+): StreamStatus {
+  if (!stream.enabled) return "disabled";
+  if (stream.forceLive) return "live";
+  const t = now.getTime();
+  const start = new Date(stream.startsAt).getTime();
+  const end = new Date(stream.endsAt).getTime();
+  if (t < start) return "upcoming";
+  if (t > end) return "ended";
+  return "live";
+}
+
+/** @deprecated prefer getStreamStatus === "live" */
 export function isStreamLiveNow(
   stream: MemorialConfig["stream"],
   now = new Date(),
 ): boolean {
-  if (!stream.enabled) return false;
-  if (stream.forceLive) return true;
-  const t = now.getTime();
-  return t >= new Date(stream.startsAt).getTime() && t <= new Date(stream.endsAt).getTime();
+  return getStreamStatus(stream, now) === "live";
 }

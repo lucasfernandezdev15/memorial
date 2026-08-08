@@ -50,7 +50,7 @@ export function LiveModal({ open, onClose, config }: LiveModalProps) {
 
         <div className="px-6 pb-6 pt-14 text-center">
           <p className="text-sm text-muted">{texts.watchingLive}</p>
-          <h2 className="mt-1 text-xl font-semibold text-foreground">
+          <h2 className="font-display mt-1 text-2xl font-semibold text-foreground">
             {deceased.fullName}
           </h2>
 

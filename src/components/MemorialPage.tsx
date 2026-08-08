@@ -7,10 +7,12 @@ import { QuickActions } from "./QuickActions";
 import { Tributes } from "./Tributes";
 import { EventsSidebar } from "./EventsSidebar";
 import { LiveModal } from "./LiveModal";
+import { LiveStatusBar } from "./LiveStatusBar";
 import { TributeFormModal } from "./TributeFormModal";
 import {
-  isStreamLiveNow,
+  getStreamStatus,
   type MemorialConfig,
+  type StreamStatus,
   type Tribute,
   type TributeType,
 } from "@/data/config";
@@ -25,7 +27,7 @@ export function MemorialPage({ config, autoOpenLive = false }: MemorialPageProps
   const [liveOpen, setLiveOpen] = useState(false);
   const [formMode, setFormMode] = useState<TributeType | null>(null);
   const [localTributes, setLocalTributes] = useState<Tribute[]>([]);
-  const [liveNow, setLiveNow] = useState(false);
+  const [streamStatus, setStreamStatus] = useState<StreamStatus>("disabled");
 
   const openLive = useCallback(() => setLiveOpen(true), []);
   const closeLive = useCallback(() => setLiveOpen(false), []);
@@ -35,14 +37,14 @@ export function MemorialPage({ config, autoOpenLive = false }: MemorialPageProps
   }, []);
 
   useEffect(() => {
-    const tick = () => setLiveNow(isStreamLiveNow(config.stream));
+    const tick = () => setStreamStatus(getStreamStatus(config.stream));
     tick();
-    const id = window.setInterval(tick, 30_000);
+    const id = window.setInterval(tick, 15_000);
     return () => window.clearInterval(id);
   }, [config.stream]);
 
   useEffect(() => {
-    if (autoOpenLive && isStreamLiveNow(config.stream)) {
+    if (autoOpenLive && getStreamStatus(config.stream) === "live") {
       setLiveOpen(true);
     }
   }, [autoOpenLive, config.stream]);
@@ -77,6 +79,12 @@ export function MemorialPage({ config, autoOpenLive = false }: MemorialPageProps
   return (
     <>
       <Header brand={config.brand} texts={config.texts} />
+      <LiveStatusBar
+        status={streamStatus}
+        stream={config.stream}
+        texts={config.texts}
+        onOpenLive={openLive}
+      />
       <Hero deceased={config.deceased} texts={config.texts} />
       <QuickActions texts={config.texts} onAction={setFormMode} />
 
@@ -85,7 +93,8 @@ export function MemorialPage({ config, autoOpenLive = false }: MemorialPageProps
         <EventsSidebar
           events={config.events}
           texts={config.texts}
-          showLiveButton={liveNow}
+          stream={config.stream}
+          streamStatus={streamStatus}
           onOpenLive={openLive}
         />
       </main>

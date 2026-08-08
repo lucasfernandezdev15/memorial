@@ -3,10 +3,12 @@ import type { MemorialConfig } from "@/data/config";
 
 export function Header({ brand, texts }: Pick<MemorialConfig, "brand" | "texts">) {
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-white">
+    <header className="sticky top-0 z-40 border-b border-border bg-white/95 backdrop-blur-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-        <a href="/" className="flex items-center gap-2 text-brand">
-          <Leaf className="h-7 w-7" strokeWidth={1.75} />
+        <a href="/" className="flex items-center gap-2.5">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-white">
+            <Leaf className="h-5 w-5" strokeWidth={1.75} />
+          </span>
           <span className="text-lg font-semibold tracking-tight text-foreground">
             {brand.logoText}
           </span>
@@ -18,7 +20,10 @@ export function Header({ brand, texts }: Pick<MemorialConfig, "brand" | "texts">
               {link.label}
             </a>
           ))}
-          <a href={`tel:${brand.phone.replace(/\s/g, "")}`} className="hover:text-brand">
+          <a
+            href={`tel:${brand.phone.replace(/\s/g, "")}`}
+            className="hover:text-brand"
+          >
             {brand.phoneLabel}
           </a>
           <a href="#" className="hover:text-brand">
