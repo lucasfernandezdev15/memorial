@@ -13,14 +13,14 @@ export function ProfileAvatar({
 }: ProfileAvatarProps) {
   return (
     <div
-      className={`overflow-hidden rounded-full border border-brass-soft/60 shadow-[0_0_0_6px_rgba(26,47,40,0.25)] ${className}`}
+      className={`overflow-hidden rounded-full border-4 border-card shadow-xl ring-2 ring-brand/20 ${className}`}
     >
       {photoUrl ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={photoUrl} alt={name} className="h-full w-full object-cover" />
       ) : (
         <div
-          className="flex h-full w-full items-center justify-center bg-gradient-to-b from-brand-mid to-brand font-serif text-3xl font-medium tracking-[0.12em] text-brass-soft"
+          className="font-display flex h-full w-full items-center justify-center bg-gradient-to-br from-brand to-brand-dark text-3xl font-semibold tracking-wide text-white"
           aria-label={name}
         >
           {initials}
@@ -40,10 +40,10 @@ export function HeroBanner({ bannerUrl }: { bannerUrl?: string }) {
 
   return (
     <div
-      className="h-full w-full bg-[radial-gradient(ellipse_at_60%_40%,#3d5a52_0%,#1a2f28_45%,#0f1c18_100%)]"
+      className="h-full w-full bg-[linear-gradient(135deg,#7eb8be_0%,#4a9aa3_28%,#2d7a82_58%,#1f5f66_100%)]"
       aria-hidden
     >
-      <div className="h-full w-full bg-[linear-gradient(115deg,transparent_20%,rgba(156,139,110,0.12)_50%,transparent_80%)]" />
+      <div className="h-full w-full bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.35),transparent_45%),radial-gradient(circle_at_85%_20%,rgba(212,160,90,0.28),transparent_40%)]" />
     </div>
   );
 }

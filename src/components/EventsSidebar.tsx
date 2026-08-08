@@ -1,5 +1,6 @@
 "use client";
 
+import { MapPin, DoorOpen, Calendar, Radio } from "lucide-react";
 import type { MemorialConfig } from "@/data/config";
 
 interface EventsSidebarProps {
@@ -16,54 +17,48 @@ export function EventsSidebar({
   onOpenLive,
 }: EventsSidebarProps) {
   return (
-    <aside className="lg:sticky lg:top-8 lg:self-start">
-      <p className="text-[11px] uppercase tracking-[0.28em] text-brass">
+    <aside className="lg:sticky lg:top-24 lg:self-start">
+      <h2 className="font-display text-2xl font-semibold text-ink">
         {texts.eventsTitle}
-      </p>
+      </h2>
 
-      <div className="mt-5 space-y-10">
+      <div className="mt-4 space-y-4">
         {events.map((event) => (
-          <div key={event.id}>
-            <h3 className="font-serif text-3xl font-medium tracking-wide text-ink">
-              {event.title}
-            </h3>
-            <div className="ornament-line mt-3 w-16" />
-
-            <dl className="mt-6 space-y-4 text-sm tracking-wide text-foreground/90">
-              <div>
-                <dt className="text-[10px] uppercase tracking-[0.2em] text-muted">
-                  Lugar
-                </dt>
-                <dd className="mt-1 font-medium uppercase tracking-[0.08em]">
+          <div key={event.id} className="surface-card overflow-hidden">
+            <div className="bg-gradient-to-r from-brand to-brand-dark px-4 py-3">
+              <h3 className="text-sm font-bold uppercase tracking-wide text-white">
+                {event.title}
+              </h3>
+            </div>
+            <div className="space-y-3 px-4 py-4 text-sm">
+              <div className="flex items-start gap-2.5">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                <span className="font-semibold uppercase tracking-wide">
                   {event.location}
-                </dd>
+                </span>
               </div>
               {event.room && (
-                <div>
-                  <dt className="text-[10px] uppercase tracking-[0.2em] text-muted">
-                    Sala
-                  </dt>
-                  <dd className="mt-1">{event.room}</dd>
+                <div className="flex items-start gap-2.5">
+                  <DoorOpen className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                  <span>{event.room}</span>
                 </div>
               )}
-              <div>
-                <dt className="text-[10px] uppercase tracking-[0.2em] text-muted">
-                  Horario
-                </dt>
-                <dd className="mt-1">{event.datetimeLabel}</dd>
+              <div className="flex items-start gap-2.5">
+                <Calendar className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                <span>{event.datetimeLabel}</span>
               </div>
-            </dl>
 
-            {event.hasLiveStream && showLiveButton && (
-              <button
-                type="button"
-                onClick={onOpenLive}
-                className="mt-8 flex w-full items-center justify-center gap-3 bg-live px-5 py-3.5 text-[11px] font-medium uppercase tracking-[0.22em] text-paper transition hover:bg-live-soft"
-              >
-                <span className="live-pulse h-1.5 w-1.5 rounded-full bg-paper" />
-                {texts.liveButton}
-              </button>
-            )}
+              {event.hasLiveStream && showLiveButton && (
+                <button
+                  type="button"
+                  onClick={onOpenLive}
+                  className="live-glow mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-live px-4 py-3.5 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-live-dark"
+                >
+                  <Radio className="live-pulse h-4 w-4" />
+                  {texts.liveButton}
+                </button>
+              )}
+            </div>
           </div>
         ))}
       </div>

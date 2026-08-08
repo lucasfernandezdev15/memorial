@@ -12,7 +12,7 @@ interface TributeFormModalProps {
 }
 
 const titles: Record<TributeType, string> = {
-  message: "Dejar un mensaje",
+  message: "Enviar un mensaje",
   candle: "Encender una vela",
   photo: "Compartir un recuerdo",
 };
@@ -79,104 +79,102 @@ export function TributeFormModal({
     onClose();
   };
 
+  const inputClass =
+    "mt-1.5 w-full rounded-xl border border-border bg-background/50 px-3.5 py-2.5 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/15";
+
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/70 p-4 backdrop-blur-[2px]"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/60 p-4 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       onClick={handleClose}
     >
       <div
-        className="relative w-full max-w-md bg-paper px-8 py-10"
+        className="relative w-full max-w-md rounded-2xl bg-card p-6 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           type="button"
           onClick={handleClose}
-          className="absolute right-4 top-4 text-muted transition hover:text-ink"
+          className="absolute right-3 top-3 rounded-full p-1.5 text-muted transition hover:bg-background hover:text-ink"
           aria-label="Cerrar"
         >
-          <X className="h-5 w-5" strokeWidth={1.5} />
+          <X className="h-5 w-5" />
         </button>
 
-        <p className="text-[11px] uppercase tracking-[0.28em] text-brass">
-          Homenaje
-        </p>
-        <h2 className="font-serif mt-2 text-3xl font-medium tracking-wide text-ink">
+        <h2 className="font-display pr-8 text-2xl font-semibold text-ink">
           {titles[mode]}
         </h2>
-        <div className="ornament-line mt-4 w-16" />
-        <p className="mt-4 text-xs tracking-wide text-muted">
+        <p className="mt-1 text-xs text-muted">
           Se guarda en este navegador (demo local).
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          <label className="block text-[11px] uppercase tracking-[0.16em] text-muted">
-            Su nombre
+        <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+          <label className="block text-sm font-medium">
+            Tu nombre
             <input
               required
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
-              className="field mt-1 text-sm tracking-normal text-foreground normal-case"
-              placeholder="Nombre completo"
+              className={inputClass}
+              placeholder="Nombre"
             />
           </label>
 
-          <label className="block text-[11px] uppercase tracking-[0.16em] text-muted">
-            Relación
+          <label className="block text-sm font-medium">
+            Parentesco / relación
             <input
               value={relation}
               onChange={(e) => setRelation(e.target.value)}
-              className="field mt-1 text-sm tracking-normal text-foreground normal-case"
+              className={inputClass}
               placeholder="Opcional"
             />
           </label>
 
           {mode === "message" && (
-            <label className="block text-[11px] uppercase tracking-[0.16em] text-muted">
+            <label className="block text-sm font-medium">
               Mensaje
               <textarea
                 required
                 rows={4}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                className="field mt-1 resize-none text-sm tracking-normal text-foreground normal-case"
-                placeholder="Escriba su mensaje..."
+                className={`${inputClass} resize-none`}
+                placeholder="Escribí tu mensaje..."
               />
             </label>
           )}
 
           {mode === "photo" && (
-            <label className="block text-[11px] uppercase tracking-[0.16em] text-muted">
-              Imagen
+            <label className="block text-sm font-medium">
+              Foto
               <input
                 required
                 type="file"
                 accept="image/*"
                 onChange={(e) => handleImage(e.target.files?.[0] ?? null)}
-                className="mt-3 w-full text-sm normal-case tracking-normal text-foreground"
+                className="mt-2 w-full text-sm"
               />
               {imageUrl && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={imageUrl}
                   alt="Vista previa"
-                  className="mt-4 max-h-40 w-full object-cover"
+                  className="mt-3 max-h-40 w-full rounded-xl object-cover"
                 />
               )}
             </label>
           )}
 
           {mode === "candle" && (
-            <p className="border-y border-border py-4 text-sm italic leading-relaxed text-brand-mid">
-              Se publicará una vela en el memorial, como gesto de presencia y
-              recuerdo.
+            <p className="rounded-xl bg-accent/10 px-4 py-3 text-sm text-accent-dark">
+              Se publicará una vela en el memorial como gesto de recuerdo.
             </p>
           )}
 
           <button
             type="submit"
-            className="w-full bg-brand py-3.5 text-[11px] font-medium uppercase tracking-[0.22em] text-paper transition hover:bg-brand-mid"
+            className="w-full rounded-xl bg-brand py-3 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-brand-dark"
           >
             Enviar
           </button>

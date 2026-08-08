@@ -80,7 +80,7 @@ export function MemorialPage({ config, autoOpenLive = false }: MemorialPageProps
       <Hero deceased={config.deceased} texts={config.texts} />
       <QuickActions texts={config.texts} onAction={setFormMode} />
 
-      <main className="mx-auto grid max-w-6xl gap-14 px-5 pb-24 pt-4 md:px-8 lg:grid-cols-[1fr_300px] lg:gap-16">
+      <main className="mx-auto grid max-w-6xl gap-8 px-4 pb-16 pt-2 lg:grid-cols-[1fr_320px]">
         <Tributes tributes={tributes} texts={config.texts} />
         <EventsSidebar
           events={config.events}
@@ -90,11 +90,11 @@ export function MemorialPage({ config, autoOpenLive = false }: MemorialPageProps
         />
       </main>
 
-      <footer className="border-t border-border/80 py-10 text-center">
-        <p className="font-serif text-xl tracking-wide text-ink">
+      <footer className="border-t border-border bg-card py-8 text-center">
+        <p className="font-display text-lg font-semibold text-ink">
           {config.brand.name}
         </p>
-        <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-muted">
+        <p className="mt-1 text-xs uppercase tracking-[0.14em] text-muted">
           {config.brand.tagline}
         </p>
       </footer>
