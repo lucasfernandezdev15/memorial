@@ -23,19 +23,18 @@ export function Tributes({ tributes, texts }: TributesProps) {
   }, [filter, tributes]);
 
   const tabs: { id: Filter; label: string }[] = [
-    { id: "all", label: "Todas" },
-    { id: "photo", label: "Fotos y videos" },
-    { id: "candle", label: "Velas" },
+    { id: "all", label: "TODAS" },
+    { id: "photo", label: "FOTOS Y VIDEOS" },
+    { id: "candle", label: "VELAS" },
   ];
 
   return (
     <section>
-      <h2 className="font-display text-2xl font-semibold text-ink">
-        {texts.tributesTitle}{" "}
-        <span className="text-brand">({tributes.length})</span>
+      <h2 className="text-lg font-bold text-foreground">
+        {texts.tributesTitle} ({tributes.length})
       </h2>
 
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-3 flex flex-wrap gap-2">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -43,8 +42,8 @@ export function Tributes({ tributes, texts }: TributesProps) {
             onClick={() => setFilter(tab.id)}
             className={`rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide transition ${
               filter === tab.id
-                ? "bg-brand text-white shadow-sm"
-                : "border border-border bg-card text-foreground hover:border-brand hover:text-brand"
+                ? "bg-brand text-white"
+                : "border border-border bg-white text-foreground hover:border-brand"
             }`}
           >
             {tab.label}
@@ -52,23 +51,20 @@ export function Tributes({ tributes, texts }: TributesProps) {
         ))}
       </div>
 
-      <div className="mt-5 space-y-3">
+      <div className="mt-4 space-y-3">
         {filtered.length === 0 && (
-          <p className="surface-card p-8 text-center text-sm text-muted">
-            No hay homenajes todavía. Sé el primero en dejar un recuerdo.
+          <p className="rounded-xl border border-border bg-white p-6 text-center text-sm text-muted">
+            No hay homenajes todavía.
           </p>
         )}
 
         {filtered.map((tribute) => (
-          <article key={tribute.id} className="surface-card p-4 sm:p-5">
+          <article
+            key={tribute.id}
+            className="rounded-xl border border-border bg-white p-4 shadow-sm"
+          >
             <div className="flex items-start gap-3">
-              <div
-                className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${
-                  tribute.type === "candle"
-                    ? "bg-accent/15 text-accent-dark"
-                    : "bg-brand-soft text-brand"
-                }`}
-              >
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">
                 {tribute.type === "candle" && <Flame className="h-5 w-5" />}
                 {tribute.type === "photo" && <ImageIcon className="h-5 w-5" />}
                 {tribute.type === "message" && (
@@ -77,23 +73,23 @@ export function Tributes({ tributes, texts }: TributesProps) {
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-baseline gap-x-2">
-                  <h3 className="font-semibold text-ink">{tribute.author}</h3>
+                  <h3 className="font-semibold text-foreground">
+                    {tribute.author}
+                  </h3>
                   {tribute.relation && (
                     <span className="text-xs text-muted">{tribute.relation}</span>
                   )}
                 </div>
-                <p className="mt-1.5 text-sm leading-relaxed text-foreground/90">
-                  {tribute.content}
-                </p>
+                <p className="mt-1 text-sm text-foreground/90">{tribute.content}</p>
                 {tribute.imageUrl && (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={tribute.imageUrl}
                     alt=""
-                    className="mt-3 max-h-64 w-full rounded-xl object-cover"
+                    className="mt-3 max-h-64 w-full rounded-lg object-cover"
                   />
                 )}
-                <p className="mt-2.5 text-xs text-muted">
+                <p className="mt-2 text-xs text-muted">
                   {new Date(tribute.createdAt).toLocaleString("es-AR", {
                     dateStyle: "short",
                     timeStyle: "short",

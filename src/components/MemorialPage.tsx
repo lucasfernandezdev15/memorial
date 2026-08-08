@@ -90,13 +90,8 @@ export function MemorialPage({ config, autoOpenLive = false }: MemorialPageProps
         />
       </main>
 
-      <footer className="border-t border-border bg-card py-8 text-center">
-        <p className="font-display text-lg font-semibold text-ink">
-          {config.brand.name}
-        </p>
-        <p className="mt-1 text-xs uppercase tracking-[0.14em] text-muted">
-          {config.brand.tagline}
-        </p>
+      <footer className="border-t border-border bg-white py-6 text-center text-xs text-muted">
+        {config.brand.name} — {config.brand.tagline}
       </footer>
 
       <LiveModal open={liveOpen} onClose={closeLive} config={config} />
