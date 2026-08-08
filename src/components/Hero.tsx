@@ -1,4 +1,3 @@
-import { Share2 } from "lucide-react";
 import type { MemorialConfig } from "@/data/config";
 import { HeroBanner, ProfileAvatar } from "./Placeholders";
 
@@ -7,40 +6,48 @@ export function Hero({
   texts,
 }: Pick<MemorialConfig, "deceased" | "texts">) {
   return (
-    <section className="bg-white">
-      <div className="relative h-48 w-full overflow-hidden sm:h-56 md:h-64">
+    <section className="relative">
+      <div className="grain relative min-h-[68vh] w-full overflow-hidden md:min-h-[72vh]">
         <HeroBanner bannerUrl={deceased.bannerUrl} />
-        <button
-          type="button"
-          className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-md bg-gold px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-white shadow hover:bg-gold-dark"
-        >
-          <Share2 className="h-3.5 w-3.5" />
-          {texts.share}
-        </button>
-      </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-brand via-brand/55 to-brand/25" />
 
-      <div className="relative mx-auto max-w-6xl px-4">
-        <div className="absolute -top-12 left-4 sm:-top-14">
-          <ProfileAvatar
-            initials={deceased.initials}
-            photoUrl={deceased.photoUrl}
-            name={deceased.fullName}
-            className="h-24 w-24 sm:h-28 sm:w-28"
-          />
-        </div>
+        <div className="absolute inset-0 flex flex-col items-center justify-end px-5 pb-16 pt-28 text-center md:pb-20">
+          <div className="animate-rise mb-8">
+            <ProfileAvatar
+              initials={deceased.initials}
+              photoUrl={deceased.photoUrl}
+              name={deceased.fullName}
+              className="mx-auto h-28 w-28 md:h-32 md:w-32"
+            />
+          </div>
 
-        <div className="pb-6 pl-32 pt-4 sm:pl-36">
-          <nav className="text-xs text-muted">
-            Inicio <span className="mx-1">›</span> Obituarios{" "}
-            <span className="mx-1">›</span> {deceased.fullName}
-          </nav>
-          <h1 className="mt-1 text-2xl font-bold text-foreground sm:text-3xl">
+          <p className="animate-rise-delay text-[11px] uppercase tracking-[0.35em] text-brass-soft">
+            En memoria de
+          </p>
+          <h1 className="animate-rise-delay font-serif mt-3 max-w-3xl text-4xl font-medium leading-[1.1] tracking-wide text-paper sm:text-5xl md:text-6xl">
             {deceased.fullName}
           </h1>
-          <p className="mt-0.5 text-sm text-muted">
-            {deceased.birthYear} ~ {deceased.deathYear} ({deceased.age} años)
+          <div className="animate-rise-delay-2 ornament-line mx-auto mt-6 w-24" />
+          <p className="animate-rise-delay-2 mt-5 text-sm tracking-[0.12em] text-paper/75">
+            {deceased.birthYear} — {deceased.deathYear}
+            <span className="mx-2 text-brass-soft">·</span>
+            {deceased.age} años
           </p>
+          <button
+            type="button"
+            className="animate-rise-delay-2 mt-8 text-[11px] uppercase tracking-[0.22em] text-brass-soft transition hover:text-paper"
+          >
+            {texts.share}
+          </button>
         </div>
+      </div>
+
+      <div className="mx-auto max-w-6xl px-5 pt-4 md:px-8">
+        <nav className="text-[11px] uppercase tracking-[0.16em] text-muted">
+          Inicio <span className="mx-2 text-brass">/</span> Obituarios{" "}
+          <span className="mx-2 text-brass">/</span>{" "}
+          <span className="text-foreground">{deceased.fullName}</span>
+        </nav>
       </div>
     </section>
   );

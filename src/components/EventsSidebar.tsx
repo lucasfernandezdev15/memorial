@@ -1,6 +1,5 @@
 "use client";
 
-import { MapPin, DoorOpen, Calendar } from "lucide-react";
 import type { MemorialConfig } from "@/data/config";
 
 interface EventsSidebarProps {
@@ -17,47 +16,54 @@ export function EventsSidebar({
   onOpenLive,
 }: EventsSidebarProps) {
   return (
-    <aside>
-      <h2 className="text-lg font-bold text-foreground">{texts.eventsTitle}</h2>
+    <aside className="lg:sticky lg:top-8 lg:self-start">
+      <p className="text-[11px] uppercase tracking-[0.28em] text-brass">
+        {texts.eventsTitle}
+      </p>
 
-      <div className="mt-3 space-y-4">
+      <div className="mt-5 space-y-10">
         {events.map((event) => (
-          <div
-            key={event.id}
-            className="overflow-hidden rounded-xl border border-border bg-white shadow-sm"
-          >
-            <div className="bg-brand px-4 py-2.5 text-sm font-semibold text-white">
+          <div key={event.id}>
+            <h3 className="font-serif text-3xl font-medium tracking-wide text-ink">
               {event.title}
-            </div>
-            <div className="space-y-2.5 px-4 py-4 text-sm">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                <span className="font-medium uppercase">{event.location}</span>
+            </h3>
+            <div className="ornament-line mt-3 w-16" />
+
+            <dl className="mt-6 space-y-4 text-sm tracking-wide text-foreground/90">
+              <div>
+                <dt className="text-[10px] uppercase tracking-[0.2em] text-muted">
+                  Lugar
+                </dt>
+                <dd className="mt-1 font-medium uppercase tracking-[0.08em]">
+                  {event.location}
+                </dd>
               </div>
               {event.room && (
-                <div className="flex items-start gap-2.5">
-                  <DoorOpen className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                  <span>{event.room}</span>
+                <div>
+                  <dt className="text-[10px] uppercase tracking-[0.2em] text-muted">
+                    Sala
+                  </dt>
+                  <dd className="mt-1">{event.room}</dd>
                 </div>
               )}
-              <div className="flex items-start gap-2.5">
-                <Calendar className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                <span>{event.datetimeLabel}</span>
+              <div>
+                <dt className="text-[10px] uppercase tracking-[0.2em] text-muted">
+                  Horario
+                </dt>
+                <dd className="mt-1">{event.datetimeLabel}</dd>
               </div>
+            </dl>
 
-              {event.hasLiveStream && showLiveButton && (
-                <button
-                  type="button"
-                  onClick={onOpenLive}
-                  className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg bg-live px-4 py-3 text-sm font-bold uppercase tracking-wide text-white shadow transition hover:bg-live-dark"
-                >
-                  <span className="live-pulse" aria-hidden>
-                    ((●))
-                  </span>
-                  {texts.liveButton}
-                </button>
-              )}
-            </div>
+            {event.hasLiveStream && showLiveButton && (
+              <button
+                type="button"
+                onClick={onOpenLive}
+                className="mt-8 flex w-full items-center justify-center gap-3 bg-live px-5 py-3.5 text-[11px] font-medium uppercase tracking-[0.22em] text-paper transition hover:bg-live-soft"
+              >
+                <span className="live-pulse h-1.5 w-1.5 rounded-full bg-paper" />
+                {texts.liveButton}
+              </button>
+            )}
           </div>
         ))}
       </div>

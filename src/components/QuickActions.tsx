@@ -1,6 +1,5 @@
 "use client";
 
-import { Camera, MessageCircleHeart, Flame } from "lucide-react";
 import type { MemorialConfig, TributeType } from "@/data/config";
 
 interface QuickActionsProps {
@@ -9,27 +8,35 @@ interface QuickActionsProps {
 }
 
 export function QuickActions({ texts, onAction }: QuickActionsProps) {
-  const actions: { icon: typeof Camera; label: string; type: TributeType }[] = [
-    { icon: Camera, label: texts.shareMemory, type: "photo" },
-    { icon: MessageCircleHeart, label: texts.sendMessage, type: "message" },
-    { icon: Flame, label: texts.lightCandle, type: "candle" },
+  const actions: { label: string; type: TributeType }[] = [
+    { label: texts.shareMemory, type: "photo" },
+    { label: texts.sendMessage, type: "message" },
+    { label: texts.lightCandle, type: "candle" },
   ];
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-4">
-      <div className="grid grid-cols-1 divide-y divide-border rounded-xl border border-border bg-white shadow-sm sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-        {actions.map(({ icon: Icon, label, type }) => (
-          <button
-            key={label}
-            type="button"
-            onClick={() => onAction(type)}
-            className="flex items-center justify-center gap-3 px-4 py-5 text-sm font-medium text-brand transition hover:bg-gray-50"
-          >
-            <Icon className="h-6 w-6 shrink-0" strokeWidth={1.5} />
-            <span>{label}</span>
-          </button>
+    <div className="mx-auto max-w-6xl px-5 py-10 md:px-8">
+      <div className="ornament-line mb-8" />
+      <div className="flex flex-col items-center justify-center gap-6 text-center sm:flex-row sm:gap-0">
+        {actions.map(({ label, type }, i) => (
+          <div key={label} className="flex items-center">
+            {i > 0 && (
+              <span
+                className="mx-6 hidden h-3 w-px bg-border sm:block"
+                aria-hidden
+              />
+            )}
+            <button
+              type="button"
+              onClick={() => onAction(type)}
+              className="link-underline text-[12px] font-normal uppercase tracking-[0.2em] text-brand transition hover:text-brass"
+            >
+              {label}
+            </button>
+          </div>
         ))}
       </div>
+      <div className="ornament-line mt-8" />
     </div>
   );
 }

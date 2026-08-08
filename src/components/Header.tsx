@@ -1,32 +1,36 @@
-import { Leaf } from "lucide-react";
 import type { MemorialConfig } from "@/data/config";
 
 export function Header({ brand, texts }: Pick<MemorialConfig, "brand" | "texts">) {
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-white">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-        <a href="/" className="flex items-center gap-2 text-brand">
-          <Leaf className="h-7 w-7" strokeWidth={1.75} />
-          <span className="text-lg font-semibold tracking-tight text-foreground">
+    <header className="absolute inset-x-0 top-0 z-40">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-5 md:px-8">
+        <a href="/" className="group">
+          <span className="font-serif text-2xl font-medium tracking-[0.04em] text-paper md:text-[1.65rem]">
             {brand.logoText}
+          </span>
+          <span className="mt-0.5 block text-[10px] font-normal uppercase tracking-[0.28em] text-brass-soft/90">
+            {brand.tagline}
           </span>
         </a>
 
-        <nav className="hidden items-center gap-5 text-xs font-semibold tracking-wide text-foreground md:flex">
+        <nav className="hidden items-center gap-7 text-[11px] font-normal uppercase tracking-[0.18em] text-paper/85 md:flex">
           {brand.navLinks.map((link) => (
-            <a key={link.label} href={link.href} className="hover:text-brand">
+            <a key={link.label} href={link.href} className="link-underline">
               {link.label}
             </a>
           ))}
-          <a href={`tel:${brand.phone.replace(/\s/g, "")}`} className="hover:text-brand">
+          <a
+            href={`tel:${brand.phone.replace(/\s/g, "")}`}
+            className="link-underline text-brass-soft"
+          >
             {brand.phoneLabel}
           </a>
-          <a href="#" className="hover:text-brand">
+          <a href="#" className="link-underline">
             {texts.activateMemorial}
           </a>
           <a
             href="#"
-            className="rounded-md bg-gold px-4 py-2 font-bold text-white transition hover:bg-gold-dark"
+            className="border border-brass-soft/50 px-4 py-2 text-paper transition hover:border-brass-soft hover:bg-paper/5"
           >
             {texts.login}
           </a>

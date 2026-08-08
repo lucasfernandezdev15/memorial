@@ -99,13 +99,13 @@ const liveWindow = demoDayWindow();
 export const memorialConfig: MemorialConfig = {
   brand: {
     name: "Memorial Vivo",
-    tagline: "Preservando memorias y perpetuando emociones",
+    tagline: "Legado · Memoria · Presencia",
     phone: "0800 123 4848",
-    phoneLabel: "0800 123 4848 | 24H",
+    phoneLabel: "Atención 24h",
     logoText: "Memorial Vivo",
     navLinks: [
-      { label: "INSTITUCIONAL", href: "#" },
-      { label: "FLORISTERÍA", href: "#" },
+      { label: "La casa", href: "#" },
+      { label: "Floristería", href: "#" },
     ],
   },
   deceased: {
@@ -144,7 +144,7 @@ export const memorialConfig: MemorialConfig = {
       author: "Paula Santos",
       relation: "Amiga",
       type: "candle",
-      content: "Encendió una vela virtual en su memoria.",
+      content: "Encendió una vela en su memoria.",
       createdAt: new Date(Date.now() - 1000 * 60 * 90).toISOString(),
     },
     {
@@ -152,7 +152,7 @@ export const memorialConfig: MemorialConfig = {
       author: "Leonardo",
       relation: "Sobrino",
       type: "candle",
-      content: "Encendió una vela virtual en su memoria.",
+      content: "Encendió una vela en su memoria.",
       createdAt: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
     },
     {
@@ -160,22 +160,22 @@ export const memorialConfig: MemorialConfig = {
       author: "Familia Rodríguez",
       type: "message",
       content:
-        "Querido Sergio, siempre te recordaremos con cariño. Descansá en paz.",
+        "Con profundo respeto y cariño, acompañamos a la familia en este momento. Su legado permanece entre nosotros.",
       createdAt: new Date(Date.now() - 1000 * 60 * 20).toISOString(),
     },
   ],
   texts: {
-    shareMemory: "Compartí una memoria",
-    sendMessage: "Enviá un mensaje de cariño",
-    lightCandle: "Encendé una vela virtual",
-    watchingLive: "Estás mirando el velatorio virtual de",
-    liveBadge: "EN VIVO",
-    liveButton: "VELATORIO VIRTUAL EN VIVO",
+    shareMemory: "Compartir un recuerdo",
+    sendMessage: "Dejar un mensaje",
+    lightCandle: "Encender una vela",
+    watchingLive: "Velatorio en transmisión de",
+    liveBadge: "En vivo",
+    liveButton: "Ver velatorio en vivo",
     tributesTitle: "Homenajes",
-    eventsTitle: "Eventos",
-    share: "COMPARTIR",
-    login: "LOGIN",
-    activateMemorial: "ACTIVAR MEMORIAL",
+    eventsTitle: "Ceremonias",
+    share: "Compartir",
+    login: "Ingresar",
+    activateMemorial: "Activar memorial",
   },
 };
 
